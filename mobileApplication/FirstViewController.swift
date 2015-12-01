@@ -9,7 +9,7 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    var msg:String = "::"
+    var msg:String = "茶葉の価格\n"
         // 背景色をGreenに設定する.
         self.view.backgroundColor = UIColor.whiteColor()
         
@@ -18,17 +18,25 @@ class FirstViewController: UIViewController {
         func getJSON() {
             let URL = NSURL(string: "http://editors.ascii.jp/c-minamoto/swift/swift-5-data.json")
             let req = NSURLRequest(URL: URL!)
+            //URLを格納
             let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+            //通信の初期化
             let session = NSURLSession(configuration: configuration,delegate: nil,delegateQueue: NSOperationQueue.mainQueue())
-            print("hoge500")
+            //通信するためにインスタンス化
+            
+            //taskの中は後から処理されるので、VMからのデータを扱う際はこの中で行うと良い？
             let task = session.dataTaskWithRequest(req,completionHandler: {
                 (data,request,error) -> Void in
+                //エラーでなければ、do{}を実行する。エラーの場合はcatch{}を実行する
                 do{
-                    print("start")
+                    //URL先のデータを格納
                     let myString = NSString(data:data!, encoding: NSUTF8StringEncoding) as! String
+                    //データが格納されているかを確認
                     print(myString)
                     
+                    //jsonデータ解析
                     let jsonDic = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableLeaves) as! NSDictionary
+                    
                     // まずキー"data"で、配列データを取り出す
                     if let arrayData = jsonDic["data"] as? NSArray {
                         // 配列のデータを１つずつ辞書データを取り出す
@@ -39,32 +47,23 @@ class FirstViewController: UIViewController {
                                 if let nameDat = data["name"] as? String{
                                     print(nameDat)
                                     msg += "名前=\(nameDat):"
-                                    
                                 }
                                 // キー"price"の数値データを取り出して、msg変数に追加
                                 print(data["price"])
                                 if let price = data["price"] as? Int{
                                     print(price)
                                     msg += "価格=\(price)\n"
-                                    
                                 }
                                 
                             }
-                        }
-                         print(msg)
-
-                   }
-                    print("----hoge1---")
-                    print(msg)
                     
+                        }
+                    }
+                    textbox(300)
                 } catch{
-                      print("----hoge200---")
-                    print(msg)
+                      print("Proccess is interrupted by error")
                 }
-                print("----hoge1.5---")
-                print(msg)
-                
-            })
+            })//ここまでTask
             print("----hoge1.8---")
             print(msg)
             
@@ -72,23 +71,27 @@ class FirstViewController: UIViewController {
             task.resume()
             print("----hoge3---")
             print(msg)
-                     }
+        }
         
 //-----------------テスト---------
         //log表示ブロック
        // let str = "hoge"
-     let message = msg
-                getJSON()
+       // let message = msg
+        getJSON()
         print("----hoge2---")
-         print(message)
+        print(msg)
  
-
-        let label = UILabel(frame: CGRectMake(0, 0, 250, 20));
-        label.center = CGPointMake(160, 284);//表示位置
-        label.textAlignment = NSTextAlignment.Center//整列
+        func textbox(tate: CGFloat){
+       // let label = UILabel(frame: CGRectMake(0, 0, 250, 120));
+            let label = UITextView(frame: CGRectMake(0, 0, 250, 120));
+        //label.center = CGPointMake(160, 284);//表示位置
+            label.center = CGPointMake(160,tate);
+            label.textAlignment = NSTextAlignment.Center//整列
      // label.text = str;
-        label.text = message;
+        label.text = msg;
         self.view.addSubview(label);
+        }
+
         //
         // 入室者詳細ボタンを生成する.
         let infoButton: UIButton = UIButton(frame: CGRectMake(0,0,200,50))
