@@ -43,15 +43,11 @@ class FirstViewController: UIViewController {
                         for datN in 0..<arrayData.count {
                             if let data = arrayData[datN] as? NSDictionary {
                                //  キー"name"の文字データを取り出して、msg変数に追加
-                                print(data["name"])
                                 if let nameDat = data["name"] as? String{
-                                    print(nameDat)
                                     msg += "名前=\(nameDat):"
                                 }
                                 // キー"price"の数値データを取り出して、msg変数に追加
-                                print(data["price"])
                                 if let price = data["price"] as? Int{
-                                    print(price)
                                     msg += "価格=\(price)\n"
                                 }
                                 
@@ -59,27 +55,18 @@ class FirstViewController: UIViewController {
                     
                         }
                     }
+                    //UITextFieldを表示。ここで呼び出すとjsonファイルが反映される
                     textbox(300)
                 } catch{
                       print("Proccess is interrupted by error")
                 }
             })//ここまでTask
-            print("----hoge1.8---")
-            print(msg)
-            
-
             task.resume()
-            print("----hoge3---")
-            print(msg)
         }
         
 //-----------------テスト---------
         //log表示ブロック
-       // let str = "hoge"
-       // let message = msg
         getJSON()
-        print("----hoge2---")
-        print(msg)
  
         func textbox(tate: CGFloat){
        // let label = UILabel(frame: CGRectMake(0, 0, 250, 120));
@@ -87,7 +74,6 @@ class FirstViewController: UIViewController {
         //label.center = CGPointMake(160, 284);//表示位置
             label.center = CGPointMake(160,tate);
             label.textAlignment = NSTextAlignment.Center//整列
-     // label.text = str;
         label.text = msg;
         self.view.addSubview(label);
         }
