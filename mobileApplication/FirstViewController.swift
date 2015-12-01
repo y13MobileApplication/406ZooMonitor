@@ -69,11 +69,17 @@ class FirstViewController: UIViewController {
         getJSON()
  
         func textbox(tate: CGFloat){
-       // let label = UILabel(frame: CGRectMake(0, 0, 250, 120));
+            // let label = UILabel(frame: CGRectMake(0, 0, 250, 120));
             let label = UITextView(frame: CGRectMake(0, 0, 250, 120));
-        //label.center = CGPointMake(160, 284);//表示位置
+            //label.center = CGPointMake(160, 284);//表示位置
             label.center = CGPointMake(160,tate);
-            label.textAlignment = NSTextAlignment.Center//整列
+            
+            label.textAlignment = NSTextAlignment.Center //中央
+
+            //label.textAlignment = NSTextAlignment.Left //左詰め
+            // テキストを編集不可にする.
+            label.editable = false
+            
         label.text = msg;
         self.view.addSubview(label);
         }
