@@ -202,6 +202,9 @@
 		65EF2B2A1BFE13E9009C5C49 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					"http://editors.ascii.jp/c-minamoto/swift/swift-5-data.json",
+				);
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Tomotaka Ohsiro";
@@ -502,6 +505,7 @@
 				65EF2B5F1BFE13EA009C5C49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65EF2B601BFE13EA009C5C49 /* Build configuration list for PBXNativeTarget "mobileApplicationTests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +514,7 @@
 				65EF2B621BFE13EA009C5C49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65EF2B631BFE13EA009C5C49 /* Build configuration list for PBXNativeTarget "mobileApplicationUITests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +523,7 @@
 				65EF2B651BFE13EA009C5C49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
