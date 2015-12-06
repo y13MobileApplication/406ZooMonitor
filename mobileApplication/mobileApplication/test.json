@@ -1,17 +1,17 @@
 {
 "log":[
-  "2015-12-01,15:31:30","0",
-  "2015-12-01,15:32:50","1",
-  "2015-12-01,15:33:45","1",
-  "2015-12-01,15:34:50","1",
-  "2015-12-01,15:35:30","0"
+       {"day":"2015-12-01,15:31:30","Count":1},
+       {"day":"2015-12-01,15:32:50","Count":1},
+       {"day":"2015-12-01,15:33:45","Count":0},
+       {"day":"2015-12-01,15:34:50","Count":1},
+       {"day":"2015-12-01,15:35:30","Count":1}
 ],
-"datail":[
-  "e135750@st.ie.u-ryukyu.ac.jp",
-  "e135711@st.ie.u-ryukyu.ac.jp",
-  "e135721@st.ie.u-ryukyu.ac.jp",
-  "e135729@st.ie.u-ryukyu.ac.jp",
-  "e135763@st.ie.u-ryukyu.ac.jp",
-  "e135740@st.ie.u-ryukyu.ac.jp"
+"detail":[
+          {"mem":"e135750@st.ie.u-ryukyu.ac.jp"},
+          {"mem":"e135711@st.ie.u-ryukyu.ac.jp"},
+          {"mem":"e135721@st.ie.u-ryukyu.ac.jp"},
+          {"mem":"e135729@st.ie.u-ryukyu.ac.jp"},
+          {"mem":"e135763@st.ie.u-ryukyu.ac.jp"},
+          {"mem":"e135740@st.ie.u-ryukyu.ac.jp"}
 ]
 }
