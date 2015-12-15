@@ -12,21 +12,21 @@ while true ; do
 
   # dateコマンドで現在の日時を取得
   DATE=`date "+%Y-%m-%d,%H:%M:%S"`
+  HOUR=`date "+%H:%M"`
   JSON=`echo "{\"day\":\"$DATE\",\"Count\":"$Count"},\r"`
-
-  echo $JSON
+  echo $HOUR #デバッグ用
+  echo $JSON #デバッグ用
   # sedコマンドでjsonファイルの3行目を書き換える
   # 現在"log.json-e"という変なファイルが作成される
   sed -i -e "3s/^/${JSON}/" log.json
   # scpコマンドでVMにファイルを送る -Pはポート番号指定 -iは鍵認証
   scp -P 1234 -i ~/.ssh/client_rsa ./log.json e135750@10.0.3.187:/var/www/html
 
-  ###
-  #
-  # ここに24時毎にlogをクリーンアップするソースコードを書きます
-  #
-  ###
-
+  # 24時間毎にtemplate.jsonからlog.jsonへと上書き
+  if [[ $HOUR == "24:00" ]]; then
+    echo "clean up..." # クリーンアップ
+    cat template.json > log.json
+  fi
   # 1分ごとにファイル送信(適時変更)
   sleep 60
 done
