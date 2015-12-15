@@ -17,12 +17,25 @@ class FirstViewController: UIViewController {
         self.view.backgroundColor = UIColor.whiteColor()
         
 //-----------------テスト---------
+      /*  enum NSURLRequestCachePolicy : UInt {
+            case UseProtocolCachePolicy
+            case ReloadIgnoringLocalCacheData
+            case ReloadIgnoringLocalAndRemoteCacheData
+            static var ReloadIgnoringCacheData: NSURLRequestCachePolicy { get }
+            case ReturnCacheDataElseLoad
+            case ReturnCacheDataDontLoad
+            case ReloadRevalidatingCacheData
+        }*/
         
         func getJSON() {//http://www.cc.u-ryukyu.ac.jp/~e135740/test.json
-            //http://editors.ascii.jp/c-minamoto/swift/swift-5-data.json
-            let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/vest.json")
-            //let URL = NSURL(string: "http://10.0.3.187/test.json")
-            let req = NSURLRequest(URL: URL!)
+            // let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/test.json")
+           // let URL = NSURL(string: "http://10.0.3.187/log.json")
+            guard let URL = NSURL(string: "http://10.0.3.187/log.json") else{
+                return
+            }
+            let req = NSURLRequest(URL: URL,cachePolicy: .ReloadIgnoringLocalCacheData,
+                timeoutInterval: 15.0)
+            
             //URLを格納
             let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
             //通信の初期化
@@ -44,34 +57,21 @@ class FirstViewController: UIViewController {
                     //jsonデータ解析
                     let jsonDic = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableLeaves) as! NSDictionary
                         print("ほげ-1")
-                    // まずキー"data"で、配列データを取り出す
-              /*      if let arrayData = jsonDic["detail"] as? NSArray {
-                        // 配列のデータを１つずつ辞書データを取り出す
-                        for datN in 0..<arrayData.count {
-                            if let data = arrayData[datN] as? NSDictionary {
-                               //  キー"name"の文字データを取り出して、msg変数に追加
-                                if let nameDat = data["mem"] as? String{
-                                    msg += "名前=\(nameDat)\n"
-                                }
-                            }
-                    
-                        }}*/
-print(msg)
+                        print(msg)
                     if let arrayData = jsonDic["log"] as? NSArray {
                     // 配列のデータを１つずつ辞書データを取り出す
                          print("ほげ1")
+                        //  let mem_count = arrayData[0]["Count"]
+                       
                     for datN in 0..<arrayData.count {
-                        if let data = arrayData[datN] as? NSDictionary {
+                        if let data = arrayData[0] as? NSDictionary {
                            if let cal = data["Count"] as? Int{
                             print("ほげ2")
-                            if cal == 1 {calcu += 1}
-                            if cal == 0 {calcu -= 1}
-                                //msg += "\(calcu)"
+                        msg = "現在\(cal)人います"
                             }
                         }
-                    }
-                        msg += "\(calcu)人います"
-                        print(msg)
+                        }
+                    print(msg)
                     }
                         print(msg)
                     //UITextFieldを表示。ここで呼び出すとjsonファイルが反映される

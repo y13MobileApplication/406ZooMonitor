@@ -19,11 +19,13 @@ class FirstLogViewController: UIViewController {
         //-----------------テスト---------
         
         func getJSON() {
-            //http://www.cc.u-ryukyu.ac.jp/~e135740/test.json
-            //http://editors.ascii.jp/c-minamoto/swift/swift-5-data.json
-            let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/vest.json")
+            //let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/vest.json")
             //let URL = NSURL(string: "http://10.0.3.187/test.json")
-            let req = NSURLRequest(URL: URL!)
+            guard let URL = NSURL(string: "http://10.0.3.187/log.json") else{
+                return
+            }
+            let req = NSURLRequest(URL: URL,cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData,
+                timeoutInterval: 15.0)
             //URLを格納
             let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
             //通信の初期化
@@ -46,17 +48,6 @@ class FirstLogViewController: UIViewController {
                     let jsonDic = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableLeaves) as! NSDictionary
                     print("ほげ-1")
                     // まずキー"data"で、配列データを取り出す
-               /*     if let arrayData = jsonDic["detail"] as? NSArray {
-                        // 配列のデータを１つずつ辞書データを取り出す
-                        for datN in 0..<arrayData.count {
-                            if let data = arrayData[datN] as? NSDictionary {
-                                //  キー"name"の文字データを取り出して、msg変数に追加
-                                if let nameDat = data["mem"] as? String{
-                                    msg += "名前=\(nameDat)\n"
-                                }
-                            }
-                            
-                        }}*/
                     print(msg)
                     if let arrayData = jsonDic["log"] as? NSArray {
                         // 配列のデータを１つずつ辞書データを取り出す
@@ -69,9 +60,7 @@ class FirstLogViewController: UIViewController {
                                 
                                 if let cal = data["Count"] as? Int{
                                     print("ほげ2")
-                                    if cal == 1 {calcu = "入室"}
-                                    if cal == 0 {calcu = "退室"}
-                                    msg += "\(calcu)"
+                                    msg += "\(cal)人"
                                 }
                             }
                         }
