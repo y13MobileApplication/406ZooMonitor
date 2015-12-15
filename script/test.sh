@@ -14,7 +14,7 @@ while true ; do
   # 現在"log.json-e"という変なファイルが作成される
   sed -i -e "3s/^/${JSON}/" log.json
   # scpコマンドでVMにファイルを送る -Pオプションはポート番号指定
-  # scp -P portnumber ~/log.json username@ipaddress:path
+  scp -P 1234 ./log.json e135750@10.0.3.187:/var/www/html
   # 1分ごとにファイル送信(適時変更)
   sleep 60
 done
