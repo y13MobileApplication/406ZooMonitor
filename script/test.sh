@@ -9,13 +9,15 @@ while true ; do
   # ランダムに数字を作成する(0~20)
   Random=`echo $(( $(od -vAn -N4 -tu4 < /dev/random) % 20 ))`
   Count=`echo "$Random"`
-
+  # 現在の最高気温の抽出(適正温度表示に使います)
+  Max=`curl -s http://weather.livedoor.com/forecast/webservice/json/v1\?city\=471010 | jq -r '.forecasts[0].temperature.max.celsius '`
   # dateコマンドで現在の日時を取得
   DATE=`date "+%Y-%m-%d,%H:%M:%S"`
   HOUR=`date "+%H:%M"`
-  JSON=`echo "{\"day\":\"$DATE\",\"Count\":"$Count"},\r"`
+  JSON=`echo "{\"day\":\"$DATE\",\"Count\":"$Count",\"Max\":$Max},\r"`
   echo $HOUR #デバッグ用
   echo $JSON #デバッグ用
+  echo $Max  #デバッグ用
   # sedコマンドでjsonファイルの3行目を書き換える
   # 現在"log.json-e"という変なファイルが作成される
   sed -i -e "3s/^/${JSON}/" log.json
