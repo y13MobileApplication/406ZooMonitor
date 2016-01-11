@@ -10,7 +10,7 @@ class FirstLogViewController: UIViewController {
         super.viewDidLoad()
 
         //メッセージを格納する変数
-        var msg:String = "log\n"
+        var msg:String = "\n"
         //入退室の記述の変数
         var calcu:String = ""
         // 背景色をGreenに設定する.
@@ -21,7 +21,7 @@ class FirstLogViewController: UIViewController {
         func getJSON() {
             //let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/vest.json")
             //let URL = NSURL(string: "http://10.0.3.187/test.json")
-            guard let URL = NSURL(string: "http://10.0.3.187/log.json") else{
+            guard let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/vest.json") else{
                 return
             }
             let req = NSURLRequest(URL: URL,cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData,
@@ -60,7 +60,7 @@ class FirstLogViewController: UIViewController {
                                 
                                 if let cal = data["Count"] as? Int{
                                     print("ほげ2")
-                                    msg += "\(cal)人"
+                                    msg += "\(cal)人\n"
                                 }
                             }
                         }
@@ -68,9 +68,9 @@ class FirstLogViewController: UIViewController {
                         print(msg)
                     }
                     //UITextFieldを表示。ここで呼び出すとjsonファイルが反映される
-                    textbox(300)
+                    textbox(self.view.bounds.height - self.view.bounds.height/3)
                 } catch{
-                    print("Proccess is interrupted by error")
+                    print("Error Message : Proccess is interrupted by error")
                 }
             })//ここまでTask
             task.resume()
@@ -82,60 +82,37 @@ class FirstLogViewController: UIViewController {
         
         func textbox(tate: CGFloat){
             // let label = UILabel(frame: CGRectMake(0, 0, 250, 120));
-            let label = UITextView(frame: CGRectMake(0, 0, 250, 120));
+            let label:UITextView = UITextView(frame: CGRectMake(0, 0, self.view.bounds.width,self.view.bounds.height - self.view.bounds.height*2/10));
             //label.center = CGPointMake(160, 284);//表示位置
-            label.center = CGPointMake(160,tate);
             //label.textAlignment = NSTextAlignment.Center //中央
             label.textAlignment = NSTextAlignment.Left //左詰め
             // テキストを編集不可にする.
             label.editable = false
+            
             label.text = msg;
             self.view.addSubview(label);
         }
 
-        // 入室者詳細ボタンを生成する.
-        let morelogButton: UIButton = UIButton(frame: CGRectMake(0,0,200,50))
-        morelogButton.backgroundColor = UIColor.whiteColor();
-        morelogButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        morelogButton.layer.masksToBounds = true
-        morelogButton.setTitle("More log", forState: .Normal)
-        morelogButton.layer.cornerRadius = 20.0
-        morelogButton.layer.position = CGPoint(x: self.view.bounds.width/2 , y:self.view.bounds.height-100)
-        morelogButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
-
         //戻るボタンを生成する.
-        let backButton: UIButton = UIButton(frame: CGRectMake(0,0,200,50))
+        let backButton: UIButton = UIButton(frame: CGRectMake(0,0,100,50))
         backButton.backgroundColor = UIColor.whiteColor();
         backButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         backButton.layer.masksToBounds = true
         backButton.setTitle("Back", forState: .Normal)
         backButton.layer.cornerRadius = 20.0
-        backButton.layer.position = CGPoint(x: self.view.bounds.width/2 , y:self.view.bounds.height-50)
-        backButton.addTarget(self, action: "onClickMyButton2:", forControlEvents: .TouchUpInside)
+        backButton.layer.position = CGPoint(x: self.view.bounds.width/2 , y:self.view.bounds.height-self.view.bounds.height/10)
+        backButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
         
 
         
         // ボタンを追加する.
-        self.view.addSubview(morelogButton);
         self.view.addSubview(backButton);
     }
     
     /*
     ボタンイベント.
     */
-    internal func onClickMyButton(sender: UIButton){
-        
-        // 遷移するViewを定義する.
-        let mySecondlogViewController: UIViewController = SecondLogViewController()
-        
-        // アニメーションを設定する.
-        mySecondlogViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
-        
-        // Viewの移動する.
-        self.presentViewController(mySecondlogViewController, animated: true, completion: nil)
-    }
-    
-    internal func onClickMyButton2(sender: UIButton){
+       internal func onClickMyButton(sender: UIButton){
         
         // 遷移するViewを定義.
         let myViewController: UIViewController = FirstViewController()
