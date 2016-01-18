@@ -20,6 +20,8 @@ while true ; do
   DATE=`date "+%Y-%m-%d,%H:%M:%S"`
   HOUR=`date "+%H:%M"`
   JSON=`echo "{\"day\":\"$DATE\",\"Count\":"$Count"},\r"`
+  # gnuplot 出力用のデータを作成する
+  DAT=`echo $DATE $Count >> graph.dat`
 
   # sedコマンドでjsonファイルの3行目を書き換える
   # 現在"log.json-e"という変なファイルが作成される
@@ -29,8 +31,17 @@ while true ; do
     echo "File Deleted"
     rm -r log.json-e
   fi
+  # gnuplotのコマンド
+  #gnuplot -e "
+  #  set title 'test graph' ;
+  #  set xdata time ;
+  #  set timefmt '%Y-%m-%d,%H:%M:%S' ;
+  #  set format x "%H:%M" ;
+  #  plot "graph.dat" using 1:2 w l ;
+  #  pause -1
+  #"
   # scpコマンドでVMにファイルを送る -Pはポート番号指定 -iは鍵認証
-  scp -P 1234 -i ~/.ssh/client_rsa ./log.json e135750@10.0.3.187:/var/www/html
+  #scp -P 1234 -i ~/.ssh/client_rsa ./log.json e135750@10.0.3.187:/var/www/html
 
   # 24時間毎にtemplate.jsonからlog.jsonへと上書き
   if [[ $HOUR == "24:00" ]]; then
