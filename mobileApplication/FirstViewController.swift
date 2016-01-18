@@ -64,6 +64,7 @@ class FirstViewController: UIViewController {
                                 if let cal:Int = data["Count"] as? Int{
                                     log += "\(cal)人\n"
                                     msg = "現在\(cal)人います"
+                                    self.title = "現在\(cal)人"
                                 }
                             }
                             else{
@@ -90,6 +91,7 @@ class FirstViewController: UIViewController {
                 }
             })//ここまでTask
             task.resume()
+            
         }
         
 //-----------------テスト---------
@@ -174,7 +176,8 @@ class FirstViewController: UIViewController {
         mySecondViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
         
         // Viewの移動する.
-        self.presentViewController(mySecondViewController, animated: true, completion: nil)
+        //self.presentViewController(mySecondViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(mySecondViewController, animated: true)
     }
     
     internal func onClickMyButton2(sender: UIButton){
@@ -186,7 +189,8 @@ class FirstViewController: UIViewController {
         mySecondViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
         
         // Viewの移動する.
-        self.presentViewController(mySecondViewController, animated: true, completion: nil)
+        //self.presentViewController(mySecondViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(mySecondViewController, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

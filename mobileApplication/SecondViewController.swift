@@ -15,7 +15,7 @@ class SecondViewController: UIViewController {
         var calcu:Int = 0
         // 背景色をGreenに設定する.
         self.view.backgroundColor = UIColor.whiteColor()
-        
+        self.title = "More_Infomation"
         //-----------------テスト---------
         
         func getJSON() {//http://www.cc.u-ryukyu.ac.jp/~e135740/test.json
@@ -100,15 +100,7 @@ class SecondViewController: UIViewController {
             self.view.addSubview(label);
         }
         
-        // 戻るボタンを作成.
-        let backButton: UIButton = UIButton(frame: CGRectMake(0,0,120,50))
-        backButton.backgroundColor = UIColor.redColor();
-        backButton.layer.masksToBounds = true
-        backButton.setTitle("Back", forState: .Normal)
-        backButton.layer.cornerRadius = 20.0
-        backButton.layer.position = CGPoint(x: self.view.bounds.width/2 , y:self.view.bounds.height-50)
-        backButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(backButton);
+        
     }
     
     /*
@@ -116,14 +108,6 @@ class SecondViewController: UIViewController {
     */
     internal func onClickMyButton(sender: UIButton){
         
-        // 遷移するViewを定義.
-        let myViewController: UIViewController = FirstViewController()
-        
-        // アニメーションを設定.
-        myViewController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
-        
-        // Viewの移動.
-        self.presentViewController(myViewController, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

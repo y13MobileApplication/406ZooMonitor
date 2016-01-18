@@ -13,17 +13,17 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     internal var window: UIWindow?
-
+    private var myNavigationController: UINavigationController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // ViewControllerを生成する.
         let myFirstViewController: FirstViewController = FirstViewController()
-        
+        myNavigationController = UINavigationController(rootViewController: myFirstViewController)
         // UIWindowを生成する.
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         // rootViewControllerにNatigationControllerを設定する.
-        self.window?.rootViewController = myFirstViewController
+        self.window?.rootViewController = myNavigationController
         
         self.window?.makeKeyAndVisible()
         
