@@ -6,28 +6,21 @@ while true ; do
   # とりあえずはCountに適当に数字を入れておきます
   # 湿度を%で送られて来たと仮定しています。
   # 季節が夏なら25~28℃55~65%で冬なら18~22℃45~60%
-  # Max(最高気温)で季節を判断する感じ？Max(最高気温)+2で室温と定義する。
   #
 
   # ランダムに数字を作成する(0~20)
   Random=`echo $(( $(od -vAn -N4 -tu4 < /dev/random) % 20 ))`
   Count=`echo "$Random"`
-  # 現在の最高気温の抽出(適正温度表示に使います)
-  Max=`curl -s http://weather.livedoor.com/forecast/webservice/json/v1\?city\=471010 | jq -r '.forecasts[0].temperature.max.celsius '`
   # 室温の定義
-  Room=`expr $Max + 2`
+  Room=25
   # 湿度の定義
   Rh=67
-  # 不快指数の計算式
-  DI=`echo 0.81\*$Room+0.01\*$Rh\*\(0.99\*$Room-14.3\)+46.3 | bc`
+
   # dateコマンドで現在の日時を取得
   DATE=`date "+%Y-%m-%d,%H:%M:%S"`
   HOUR=`date "+%H:%M"`
-  JSON=`echo "{\"day\":\"$DATE\",\"Count\":"$Count",\"Max\":$Max},\r"`
-  echo $HOUR #デバッグ用
-  echo $JSON #デバッグ用
-  echo $Max  #デバッグ用
-  echo $DI   #デバッグ用
+  JSON=`echo "{\"day\":\"$DATE\",\"Count\":"$Count"},\r"`
+
   # sedコマンドでjsonファイルの3行目を書き換える
   # 現在"log.json-e"という変なファイルが作成される
   sed -i -e "3s/^/${JSON}/" log.json
