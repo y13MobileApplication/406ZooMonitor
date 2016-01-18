@@ -15,7 +15,7 @@ class FirstLogViewController: UIViewController {
         var calcu:String = ""
         // 背景色をGreenに設定する.
         self.view.backgroundColor = UIColor.whiteColor()
-        
+        self.title = "detail_log"
         //-----------------テスト---------
         
         func getJSON() {
@@ -93,20 +93,7 @@ class FirstLogViewController: UIViewController {
             self.view.addSubview(label);
         }
 
-        //戻るボタンを生成する.
-        let backButton: UIButton = UIButton(frame: CGRectMake(0,0,100,50))
-        backButton.backgroundColor = UIColor.whiteColor();
-        backButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        backButton.layer.masksToBounds = true
-        backButton.setTitle("Back", forState: .Normal)
-        backButton.layer.cornerRadius = 20.0
-        backButton.layer.position = CGPoint(x: self.view.bounds.width/2 , y:self.view.bounds.height-self.view.bounds.height/10)
-        backButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
-        
 
-        
-        // ボタンを追加する.
-        self.view.addSubview(backButton);
     }
     
     /*
@@ -114,15 +101,7 @@ class FirstLogViewController: UIViewController {
     */
        internal func onClickMyButton(sender: UIButton){
         
-        // 遷移するViewを定義.
-        let myViewController: UIViewController = FirstViewController()
-        
-        // アニメーションを設定.
-        myViewController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
-        
-        // Viewの移動.
-        self.presentViewController(myViewController, animated: true, completion: nil)
-    }
+        }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
