@@ -5,11 +5,13 @@
 
 import UIKit
 
+
 class FirstViewController: UIViewController {
     
     //関数宣言
     private var myImageView: UIImageView!
-    
+    private var renewalButton: UIBarButtonItem!
+    private var nullButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         //メッセージを格納する変数
@@ -18,7 +20,7 @@ class FirstViewController: UIViewController {
         //現在の人数を計算する変数
         var calcu:Int = 0
         // 背景色をGreenに設定する.
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.greenColor()
  
         
 //-----------------画像---------
@@ -42,7 +44,7 @@ class FirstViewController: UIViewController {
         func getJSON() {//http://www.cc.u-ryukyu.ac.jp/~e135740/test.json
             // let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/test.json")
            // let URL = NSURL(string: "http://10.0.3.187/log.json")
-            guard let URL:NSURL = NSURL(string: "http://10.0.3.187/log.json") else{
+            guard let URL:NSURL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/test.json") else{
                 return
             }
             let req:NSURLRequest = NSURLRequest(URL: URL,cachePolicy: .ReloadIgnoringLocalCacheData,
@@ -122,6 +124,7 @@ class FirstViewController: UIViewController {
             let label:UITextView = UITextView(frame: CGRectMake(0, 0, 150, 80));
             //label.center = CGPointMake(160, 284);//表示位置
             label.center = CGPointMake(160,tate);
+            label.backgroundColor = UIColor.greenColor();
             
             label.textAlignment = NSTextAlignment.Center //中央
 
@@ -138,6 +141,7 @@ class FirstViewController: UIViewController {
             let label:UITextView = UITextView(frame: CGRectMake(0, 0, 150,80));
             //label.center = CGPointMake(160, 284);//表示位置
             label.center = CGPointMake(160,tate);
+            label.backgroundColor = UIColor.whiteColor();
             // 角に丸みをつける.
             label.layer.masksToBounds = true
             // 丸みのサイズを設定する.
@@ -158,7 +162,7 @@ class FirstViewController: UIViewController {
         //
         // 入室者詳細ボタンを生成する.
         let infoButton: UIButton = UIButton(frame: CGRectMake(0,0,200,50))
-        infoButton.backgroundColor = UIColor.whiteColor();
+        infoButton.backgroundColor = UIColor.greenColor();
         infoButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         infoButton.layer.masksToBounds = true
         infoButton.setTitle("More Infomation", forState: .Normal)
@@ -168,29 +172,27 @@ class FirstViewController: UIViewController {
         
         // ボタンを生成する.
         let logButton: UIButton = UIButton(frame: CGRectMake(0,0,150,50))
-        logButton.backgroundColor = UIColor.whiteColor();
+        logButton.backgroundColor = UIColor.greenColor();
         logButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         logButton.layer.masksToBounds = true
         logButton.setTitle("detail_log", forState: .Normal)
         logButton.layer.cornerRadius = 20.0
         logButton.layer.position = CGPoint(x: self.view.bounds.width/2 , y:self.view.bounds.height - self.view.bounds.height/10)
         logButton.addTarget(self, action: "onClickMyButton2:", forControlEvents: .TouchUpInside)
-        
-        // 更新ボタンを生成する.
-        let renewalButton: UIButton = UIButton(frame: CGRectMake(0,0,500,50))
-        renewalButton.backgroundColor = UIColor.whiteColor();
-        renewalButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        renewalButton.layer.masksToBounds = true
-        renewalButton.setTitle("ʕ̡̢̡ʘ̅͟͜͡ʘ̲̅ʔ̢̡̢", forState: .Normal)
-        renewalButton.layer.cornerRadius = 20.0
-        renewalButton.layer.position = CGPoint(x: self.view.bounds.width - self.view.bounds.height*1/20 , y:self.view.bounds.height - self.view.bounds.height*12/14)
-        renewalButton.addTarget(self, action: "onClickMyButton3:", forControlEvents: .TouchUpInside)
 
+        renewalButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self,  action: "onClickMyButton3:")
+        // ナビゲーションバーの右に設置する.
+        self.navigationItem.setRightBarButtonItems([renewalButton], animated: true)
+        
+        nullButton = UIBarButtonItem(title:"", style: .Plain, target: self,  action: "onClickMyButton4:")
+        // ナビゲーションバーの右に設置する.
+        self.navigationItem.setLeftBarButtonItems([nullButton], animated: true)
+        
         // ボタンを追加する.
         self.view.addSubview(infoButton);
         self.view.addSubview(logButton);
-        self.view.addSubview(renewalButton);
         
+
     }
     
     /*
@@ -233,7 +235,14 @@ class FirstViewController: UIViewController {
         // Viewの移動する.
         //self.presentViewController(mySecondViewController, animated: true, completion: nil)
         self.navigationController?.pushViewController(mySecondViewController, animated: true)
+        
+        
     }
+    
+    internal func onClickMyButton4(sender: UIButton){
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

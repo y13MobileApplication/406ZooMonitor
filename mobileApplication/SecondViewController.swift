@@ -6,7 +6,8 @@
 import UIKit
 
 class SecondViewController: UIViewController {
-    
+    private var renewalButton: UIBarButtonItem!
+    private var backButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         //メッセージを格納する変数
@@ -100,15 +101,59 @@ class SecondViewController: UIViewController {
             self.view.addSubview(label);
         }
         
+        /* 更新ボタンを生成する.
+        let renewalButton: UIButton = UIButton(frame: CGRectMake(0,0,50,30))
+        renewalButton.backgroundColor = UIColor.whiteColor();
+        renewalButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        renewalButton.layer.masksToBounds = true
+        renewalButton.setTitle("ʕ̡̢̡ʘ̅͟͜͡ʘ̲̅ʔ̢̡̢", forState: .Normal)
+        renewalButton.layer.cornerRadius = 20.0
+        renewalButton.layer.position = CGPoint(x: self.view.bounds.width - self.view.bounds.height*1/20 , y:self.view.bounds.height - self.view.bounds.height*12/14)
+        renewalButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
+        */
+        // ボタンを追加する.
+       // self.view.addSubview(renewalButton);
         
+        renewalButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self,  action: "onClickMyButton:")
+        // ナビゲーションバーの右に設置する.
+        self.navigationItem.setRightBarButtonItems([renewalButton], animated: true)
+
+        
+        backButton = UIBarButtonItem(title:"Home", style: .Plain, target: self,  action: "onClickMyButton2:")
+        // ナビゲーションバーの右に設置する.
+        self.navigationItem.setLeftBarButtonItems([backButton], animated: true)
+
     }
     
     /*
     ボタンイベント.
     */
     internal func onClickMyButton(sender: UIButton){
+            // 遷移するViewを定義する.
+            let mySecondViewController: UIViewController = SecondViewController()
+        
+            // アニメーションを設定する.
+            mySecondViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
+        
+            // Viewの移動する.
+            //self.presentViewController(mySecondViewController, animated: true, completion: nil)
+            self.navigationController?.pushViewController(mySecondViewController, animated: true)
+
+    }
+    
+    internal func onClickMyButton2(sender: UIButton){
+        // 遷移するViewを定義する.
+        let mySecondViewController: UIViewController = FirstViewController()
+        
+        // アニメーションを設定する.
+        mySecondViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
+        
+        // Viewの移動する.
+        //self.presentViewController(mySecondViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(mySecondViewController, animated: true)
         
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
