@@ -42,7 +42,7 @@ class FirstViewController: UIViewController {
         func getJSON() {//http://www.cc.u-ryukyu.ac.jp/~e135740/test.json
             // let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/test.json")
            // let URL = NSURL(string: "http://10.0.3.187/log.json")
-            guard let URL:NSURL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/test.json") else{
+            guard let URL:NSURL = NSURL(string: "http://10.0.3.187/log.json") else{
                 return
             }
             let req:NSURLRequest = NSURLRequest(URL: URL,cachePolicy: .ReloadIgnoringLocalCacheData,
@@ -93,7 +93,6 @@ class FirstViewController: UIViewController {
                                 }
                                 if let cal:Int = data["Count"] as? Int{
                                     log += "\(cal)人\n"
-                                    
                                 }
                             }
                         }

@@ -20,8 +20,8 @@ class FirstLogViewController: UIViewController {
         
         func getJSON() {
             //let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/vest.json")
-            //let URL = NSURL(string: "http://10.0.3.187/test.json")
-            guard let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/vest.json") else{
+            //let URL = NSURL(string: "http://10.0.3.187/log.json")
+            guard let URL = NSURL(string: "http://10.0.3.187/log.json") else{
                 return
             }
             let req = NSURLRequest(URL: URL,cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData,
@@ -68,7 +68,7 @@ class FirstLogViewController: UIViewController {
                         print(msg)
                     }
                     //UITextFieldを表示。ここで呼び出すとjsonファイルが反映される
-                    textbox(self.view.bounds.height - self.view.bounds.height/3)
+                    textbox(self.view.bounds.height - self.view.bounds.height*13/14)
                 } catch{
                     print("Error Message : Proccess is interrupted by error")
                 }
@@ -82,7 +82,7 @@ class FirstLogViewController: UIViewController {
         
         func textbox(tate: CGFloat){
             // let label = UILabel(frame: CGRectMake(0, 0, 250, 120));
-            let label:UITextView = UITextView(frame: CGRectMake(0, 0, self.view.bounds.width,self.view.bounds.height - self.view.bounds.height*2/10));
+            let label:UITextView = UITextView(frame: CGRectMake(0, tate, self.view.bounds.width,self.view.bounds.height - self.view.bounds.height*1/14));
             //label.center = CGPointMake(160, 284);//表示位置
             //label.textAlignment = NSTextAlignment.Center //中央
             label.textAlignment = NSTextAlignment.Left //左詰め
