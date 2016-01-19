@@ -6,6 +6,8 @@
 import UIKit
 
 class FirstLogViewController: UIViewController {
+    private var renewalButton: UIBarButtonItem!
+    private var backButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +23,7 @@ class FirstLogViewController: UIViewController {
         func getJSON() {
             //let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/vest.json")
             //let URL = NSURL(string: "http://10.0.3.187/log.json")
-            guard let URL = NSURL(string: "http://10.0.3.187/log.json") else{
+            guard let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/test.json") else{
                 return
             }
             let req = NSURLRequest(URL: URL,cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData,
@@ -82,7 +84,7 @@ class FirstLogViewController: UIViewController {
         
         func textbox(tate: CGFloat){
             // let label = UILabel(frame: CGRectMake(0, 0, 250, 120));
-            let label:UITextView = UITextView(frame: CGRectMake(0, tate, self.view.bounds.width,self.view.bounds.height - self.view.bounds.height*1/14));
+            let label:UITextView = UITextView(frame: CGRectMake(0, tate, self.view.bounds.width - self.view.bounds.height*3/20,self.view.bounds.height - self.view.bounds.height*1/14));
             //label.center = CGPointMake(160, 284);//表示位置
             //label.textAlignment = NSTextAlignment.Center //中央
             label.textAlignment = NSTextAlignment.Left //左詰め
@@ -92,16 +94,44 @@ class FirstLogViewController: UIViewController {
             label.text = msg;
             self.view.addSubview(label);
         }
-
-
+        
+        //ナビゲーションバーに更新ボタンを設置
+        renewalButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self,  action: "onClickMyButton:")
+        self.navigationItem.setRightBarButtonItems([renewalButton], animated: true)
+        //ナビゲーションバーにホームボタンを設置
+        backButton = UIBarButtonItem(title:"Home", style: .Plain, target: self,  action: "onClickMyButton2:")
+        self.navigationItem.setLeftBarButtonItems([backButton], animated: true)
+        
     }
     
     /*
     ボタンイベント.
     */
-       internal func onClickMyButton(sender: UIButton){
+    internal func onClickMyButton(sender: UIButton){
         
-        }
+        // 遷移するViewを定義する.
+        let mySecondViewController: UIViewController = FirstLogViewController()
+        
+        // アニメーションを設定する.
+        mySecondViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
+        
+        // Viewの移動する.
+        //self.presentViewController(mySecondViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(mySecondViewController, animated: true)
+    }
+    
+    internal func onClickMyButton2(sender: UIButton){
+        // 遷移するViewを定義する.
+        let mySecondViewController: UIViewController = FirstViewController()
+        
+        // アニメーションを設定する.
+        mySecondViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
+        
+        // Viewの移動する.
+        //self.presentViewController(mySecondViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(mySecondViewController, animated: true)
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
