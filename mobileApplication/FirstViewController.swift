@@ -175,12 +175,22 @@ class FirstViewController: UIViewController {
         logButton.layer.cornerRadius = 20.0
         logButton.layer.position = CGPoint(x: self.view.bounds.width/2 , y:self.view.bounds.height - self.view.bounds.height/10)
         logButton.addTarget(self, action: "onClickMyButton2:", forControlEvents: .TouchUpInside)
+        
+        // 更新ボタンを生成する.
+        let renewalButton: UIButton = UIButton(frame: CGRectMake(0,0,500,50))
+        renewalButton.backgroundColor = UIColor.whiteColor();
+        renewalButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        renewalButton.layer.masksToBounds = true
+        renewalButton.setTitle("ʕ̡̢̡ʘ̅͟͜͡ʘ̲̅ʔ̢̡̢", forState: .Normal)
+        renewalButton.layer.cornerRadius = 20.0
+        renewalButton.layer.position = CGPoint(x: self.view.bounds.width - self.view.bounds.height*1/20 , y:self.view.bounds.height - self.view.bounds.height*12/14)
+        renewalButton.addTarget(self, action: "onClickMyButton3:", forControlEvents: .TouchUpInside)
 
         // ボタンを追加する.
         self.view.addSubview(infoButton);
         self.view.addSubview(logButton);
-                
-                
+        self.view.addSubview(renewalButton);
+        
     }
     
     /*
@@ -203,6 +213,19 @@ class FirstViewController: UIViewController {
         
         // 遷移するViewを定義する.
         let mySecondViewController: UIViewController = FirstLogViewController()
+        
+        // アニメーションを設定する.
+        mySecondViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
+        
+        // Viewの移動する.
+        //self.presentViewController(mySecondViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(mySecondViewController, animated: true)
+    }
+    
+    internal func onClickMyButton3(sender: UIButton){
+        
+        // 遷移するViewを定義する.
+        let mySecondViewController: UIViewController = FirstViewController()
         
         // アニメーションを設定する.
         mySecondViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
