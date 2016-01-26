@@ -1,10 +1,16 @@
 PODS:
   - LTMorphingLabel (0.1.1)
+  - MaterialKit (0.3.5)
+  - PNChart (0.8.8):
+    - UICountingLabel (~> 1.2.0)
+  - UICountingLabel (1.2.0)
   - ZCAnimatedLabel (0.0.4)
   - ZFRippleButton (0.5.1)
 
 DEPENDENCIES:
   - LTMorphingLabel (from `https://github.com/lexrus/LTMorphingLabel`)
+  - MaterialKit
+  - PNChart
   - ZCAnimatedLabel
   - ZFRippleButton
 
@@ -19,7 +25,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   LTMorphingLabel: 254c44f9ef5afa79d3464f8b89d7b00567e5aebc
+  MaterialKit: 6f1e9382f89593df768bc0c31ded9952a6d8ad46
+  PNChart: 25f91e9c4688af49c3647489760624d037f5383f
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   ZCAnimatedLabel: 519b688bef4403fd356bc785f9b61cdfd8e6472d
   ZFRippleButton: 263bdf4e31dabd5826133b121d9ff908c87a6a11
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: a549da3858556090a03b796f8030a4c6af4f64e3
+
+COCOAPODS: 1.0.0.beta.2
