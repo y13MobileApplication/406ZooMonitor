@@ -17,8 +17,8 @@ while true ; do
   Rh=67
 
   # dateコマンドで現在の日時を取得
-  DATE=`date "+%Y-%m-%d,%H:%M:%S"`
-  HOUR=`date "+%H:%M"`
+  DATE=`date "+%m/%d,%H:%M"`
+  DAY=`date "+%d"`
   JSON=`echo "{\"day\":\"$DATE\",\"Count\":"$Count"},\r"`
   # gnuplot 出力用のデータを作成する
   DAT=`echo $DATE $Count >> graph.dat`
@@ -41,10 +41,10 @@ while true ; do
   #  pause -1
   #"
   # scpコマンドでVMにファイルを送る -Pはポート番号指定 -iは鍵認証
-  #scp -P 1234 -i ~/.ssh/client_rsa ./log.json e135750@10.0.3.187:/var/www/html
+  scp -P 1234 -i ~/.ssh/client_rsa ./log.json e135750@10.0.3.187:/var/www/html
 
-  # 24時間毎にtemplate.jsonからlog.jsonへと上書き
-  if [[ $HOUR == "24:00" ]]; then
+  # 1ヶ月毎にクリーンアップする
+  if [[ $DAY == "01" ]]; then
     echo "clean up..." # クリーンアップ
     cat template.json > log.json
   fi
