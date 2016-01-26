@@ -85,11 +85,17 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-mobileApplication/LTMorphingLabel.framework"
+  install_framework "Pods-mobileApplication/MaterialKit.framework"
+  install_framework "Pods-mobileApplication/PNChart.framework"
+  install_framework "Pods-mobileApplication/UICountingLabel.framework"
   install_framework "Pods-mobileApplication/ZCAnimatedLabel.framework"
   install_framework "Pods-mobileApplication/ZFRippleButton.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-mobileApplication/LTMorphingLabel.framework"
+  install_framework "Pods-mobileApplication/MaterialKit.framework"
+  install_framework "Pods-mobileApplication/PNChart.framework"
+  install_framework "Pods-mobileApplication/UICountingLabel.framework"
   install_framework "Pods-mobileApplication/ZCAnimatedLabel.framework"
   install_framework "Pods-mobileApplication/ZFRippleButton.framework"
 fi

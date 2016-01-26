@@ -6,6 +6,9 @@
 import UIKit
 import LTMorphingLabel
 import ZFRippleButton
+import ZCAnimatedLabel
+import PNChart
+
 
 class FirstViewController: UIViewController,UIApplicationDelegate {
     
@@ -13,7 +16,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
     private var myImageView: UIImageView!
     private var renewalButton: UIBarButtonItem!
     private var nullButton: UIBarButtonItem!
-    
+    var calcu:Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +29,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
         var msg:String = "現在自習室には"
         var log:String = ""
         //現在の人数を計算する変数
-        var calcu:Int = 0
+        
         // 背景色を設定する.
         self.view.backgroundColor = UIColor.whiteColor()
  
@@ -93,7 +96,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
                                     log += "log\n\(dat):"
                                 }
                                 if let cal:Int = data["Count"] as? Int{
-                                    calcu = cal
+                                    self.calcu = cal
                                     log += "\(cal)人\n"
                                     msg = "現在\(cal)人います"
                                     self.title = "現在\(cal)人"
@@ -104,7 +107,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
                                     log += "\(dat):"
                                 }
                                 if let cal:Int = data["Count"] as? Int{
-                                    calcu = cal
+                                    self.calcu = cal
                                     log += "\(cal)人\n"
                                 }
                             }
@@ -137,7 +140,6 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
              //let label = LTMorphingLabel(frame: CGRectMake(0, 0, 150, 50));
             let label:UITextView = UITextView(frame: CGRectMake(0, 0, 150, 50));
             //label.center = CGPointMake(160, 284);//表示位置
-            //label.morphingEffect = .Anvil
             label.center = CGPointMake(160,tate);
             label.backgroundColor = UIColor.clearColor();
             
@@ -173,8 +175,10 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
             label.text = log;
             self.view.addSubview(label);
         }
-        
-
+//受け渡し
+        var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.calcu = self.calcu
+//        
         // 入室者詳細ボタンを生成する.
         let infoButton: UIButton = UIButton(frame: CGRectMake(0,0,200,50))
         infoButton.backgroundColor = UIColor.whiteColor();
@@ -485,20 +489,6 @@ class BarStroke: UIView, GraphStroke {
         }
     }
 }
-extension FirstViewController {
-    
-    func morphingDidStart(label: LTMorphingLabel) {
-        
-    }
-    
-    func morphingDidComplete(label: LTMorphingLabel) {
-        
-    }
-    
-    func morphingOnProgress(label: LTMorphingLabel, _ progress: Float) {
-        
-    }
-    
+func viewWillDisappear(animated: Bool) {
 
-    
 }
