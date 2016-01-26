@@ -10,7 +10,6 @@ class FirstLogViewController: UIViewController {
     private var backButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         //メッセージを格納する変数
         var msg:String = "\n"
         //入退室の記述の変数
@@ -102,11 +101,15 @@ class FirstLogViewController: UIViewController {
         backButton = UIBarButtonItem(title:"Home", style: .Plain, target: self,  action: "onClickMyButton2:")
         self.navigationItem.setLeftBarButtonItems([backButton], animated: true)
         
+        
+        
     }
     
     /*
     ボタンイベント.
     */
+
+    
     internal func onClickMyButton(sender: UIButton){
         
         // 遷移するViewを定義する.

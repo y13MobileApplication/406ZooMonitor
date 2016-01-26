@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UIApplicationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 1
         // Do any additional setup after loading the view, typically from a nib.
     }
 

@@ -27,6 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.makeKeyAndVisible()
         
+        //permissionの設定.
+            let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge, categories: nil)
+          UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+
+        
         return true
     }
 
@@ -36,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
+        //バッジの数の設定.
+        func updateBadge(badge: Int) {
+        UIApplication.sharedApplication().applicationIconBadgeNumber = badge
+        }
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }

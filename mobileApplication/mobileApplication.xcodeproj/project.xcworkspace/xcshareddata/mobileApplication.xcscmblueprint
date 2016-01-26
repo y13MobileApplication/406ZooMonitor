@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F2FCF88C8FED6C5EEA66D81B5046A0E5E225E612",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F2FCF88C8FED6C5EEA66D81B5046A0E5E225E612" : 0,
+    "8A275F09B70C5863716115450575FD6E99921868" : 0,
+    "AA023C9090003DBB3E1EA20D4BD55D419734D589" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B156C567-EB22-45AB-8EC4-EBBC64F03F7E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F2FCF88C8FED6C5EEA66D81B5046A0E5E225E612" : "406ZooMonitor\/",
+    "8A275F09B70C5863716115450575FD6E99921868" : "BubbleTransition\/",
+    "AA023C9090003DBB3E1EA20D4BD55D419734D589" : "SwiftSpinner\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "mobileApplication",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "mobileApplication\/mobileApplication.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andreamazz\/BubbleTransition.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8A275F09B70C5863716115450575FD6E99921868"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/icanzilb\/SwiftSpinner.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AA023C9090003DBB3E1EA20D4BD55D419734D589"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/y13MobileApplication\/406ZooMonitor.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F2FCF88C8FED6C5EEA66D81B5046A0E5E225E612"
+    }
+  ]
+}

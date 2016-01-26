@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F2FCF88C8FED6C5EEA66D81B5046A0E5E225E612",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F2FCF88C8FED6C5EEA66D81B5046A0E5E225E612" : 0,
+    "39C24F858ED829FAA0D85AAAF44281FF64B670AC" : 0,
+    "AA023C9090003DBB3E1EA20D4BD55D419734D589" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "99D544AA-3871-4D62-BE96-0DD5FF50F406",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F2FCF88C8FED6C5EEA66D81B5046A0E5E225E612" : "406ZooMonitor\/",
+    "39C24F858ED829FAA0D85AAAF44281FF64B670AC" : "MaterialKit\/",
+    "AA023C9090003DBB3E1EA20D4BD55D419734D589" : "SwiftSpinner\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "mobileApplication",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "mobileApplication\/mobileApplication.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nghialv\/MaterialKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "39C24F858ED829FAA0D85AAAF44281FF64B670AC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/icanzilb\/SwiftSpinner.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AA023C9090003DBB3E1EA20D4BD55D419734D589"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/y13MobileApplication\/406ZooMonitor.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F2FCF88C8FED6C5EEA66D81B5046A0E5E225E612"
+    }
+  ]
+}
