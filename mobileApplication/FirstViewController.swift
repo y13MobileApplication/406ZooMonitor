@@ -4,16 +4,20 @@
 //
 
 import UIKit
+import LTMorphingLabel
+import ZFRippleButton
 
-
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController,UIApplicationDelegate {
     
     //関数宣言
     private var myImageView: UIImageView!
     private var renewalButton: UIBarButtonItem!
     private var nullButton: UIBarButtonItem!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         //グラフの描画
         //参考サイト:http://developer-blog.finc.co.jp/post/133981060627/
         drawLineGraph()
@@ -23,8 +27,8 @@ class FirstViewController: UIViewController {
         var log:String = ""
         //現在の人数を計算する変数
         var calcu:Int = 0
-        // 背景色をGreenに設定する.
-        self.view.backgroundColor = UIColor.greenColor()
+        // 背景色を設定する.
+        self.view.backgroundColor = UIColor.whiteColor()
  
         
 //-----------------画像---------
@@ -43,7 +47,7 @@ class FirstViewController: UIViewController {
 
         
         
-//-----------------テスト---------
+//------------JSON取得---------
         
         func getJSON() {//http://www.cc.u-ryukyu.ac.jp/~e135740/test.json
             // let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/test.json")
@@ -69,6 +73,7 @@ class FirstViewController: UIViewController {
                     //URL先のデータを格納
                     let myString:NSString = NSString(data:data!, encoding: NSUTF8StringEncoding) as! String
                     //データが格納されているかを確認
+                    
                     print(myString)
                     
                      print("ほげ-2")
@@ -88,6 +93,7 @@ class FirstViewController: UIViewController {
                                     log += "log\n\(dat):"
                                 }
                                 if let cal:Int = data["Count"] as? Int{
+                                    calcu = cal
                                     log += "\(cal)人\n"
                                     msg = "現在\(cal)人います"
                                     self.title = "現在\(cal)人"
@@ -98,18 +104,20 @@ class FirstViewController: UIViewController {
                                     log += "\(dat):"
                                 }
                                 if let cal:Int = data["Count"] as? Int{
+                                    calcu = cal
                                     log += "\(cal)人\n"
                                 }
                             }
                         }
                     }
+
                     print(msg)
                     print(log)
                     }
                     
                         print(msg)
                     //UITextFieldを表示。ここで呼び出すとjsonファイルが反映される
-                        textbox(self.view.bounds.height - self.view.bounds.height*6/10)
+                        textbox(self.view.bounds.height - self.view.bounds.height*7/10)
                         logbox(self.view.bounds.height - self.view.bounds.height*2/10)
                 } catch{
                       print("Proccess is interrupted by error")
@@ -119,16 +127,19 @@ class FirstViewController: UIViewController {
             
         }
         
-//-----------------テスト---------
+//--------------JSON取得---------
         //log表示ブロック
         getJSON()
+        
+
  
         func textbox(tate: CGFloat){
-            // let label = UILabel(frame: CGRectMake(0, 0, 250, 120));
-            let label:UITextView = UITextView(frame: CGRectMake(0, 0, 150, 80));
+             //let label = LTMorphingLabel(frame: CGRectMake(0, 0, 150, 50));
+            let label:UITextView = UITextView(frame: CGRectMake(0, 0, 150, 50));
             //label.center = CGPointMake(160, 284);//表示位置
+            //label.morphingEffect = .Anvil
             label.center = CGPointMake(160,tate);
-            label.backgroundColor = UIColor.greenColor();
+            label.backgroundColor = UIColor.clearColor();
             
             label.textAlignment = NSTextAlignment.Center //中央
 
@@ -162,11 +173,11 @@ class FirstViewController: UIViewController {
             label.text = log;
             self.view.addSubview(label);
         }
+        
 
-        //
         // 入室者詳細ボタンを生成する.
         let infoButton: UIButton = UIButton(frame: CGRectMake(0,0,200,50))
-        infoButton.backgroundColor = UIColor.greenColor();
+        infoButton.backgroundColor = UIColor.whiteColor();
         infoButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         infoButton.layer.masksToBounds = true
         infoButton.setTitle("More Infomation", forState: .Normal)
@@ -174,9 +185,9 @@ class FirstViewController: UIViewController {
         infoButton.layer.position = CGPoint(x: self.view.bounds.width/2 , y:self.view.bounds.height - self.view.bounds.height*3/10)
         infoButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
         
-        // ボタンを生成する.
-        let logButton: UIButton = UIButton(frame: CGRectMake(0,0,150,50))
-        logButton.backgroundColor = UIColor.greenColor();
+        // ログボタンを生成する.
+        let logButton: UIButton = ZFRippleButton(frame: CGRectMake(0,0,150,50))
+        logButton.backgroundColor = UIColor.whiteColor();
         logButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         logButton.layer.masksToBounds = true
         logButton.setTitle("detail_log", forState: .Normal)
@@ -195,8 +206,6 @@ class FirstViewController: UIViewController {
         // ボタンを追加する.
         self.view.addSubview(infoButton);
         self.view.addSubview(logButton);
-        
-
     }
     
     /*
@@ -247,6 +256,7 @@ class FirstViewController: UIViewController {
         
     }
     
+    //グラフ描画
     func drawLineGraph() {
         // ここにグラフの値を入力する
         let stroke1 = LineStroke(graphPoints: [1, 3, 1, 4, 9, 12, 4])
@@ -255,9 +265,10 @@ class FirstViewController: UIViewController {
         
         let graphFrame = LineStrokeGraphFrame(strokes: [stroke1])
         // グラフの座標を決定今は
-        let lineGraphView = UIView(frame: CGRect(x: 0, y: 150, width: view.frame.width, height: 200))
+        let lineGraphView = UIView(frame: CGRect(x: 0, y: self.view.bounds.height - self.view.bounds.height*7/10, width: view.frame.width, height: self.view.bounds.height/3))
         // グラフの背景の色
-        lineGraphView.backgroundColor = UIColor.grayColor()
+        lineGraphView.backgroundColor = UIColor.darkGrayColor()
+        lineGraphView.layer.masksToBounds = true
         lineGraphView.addSubview(graphFrame)
         
         view.addSubview(lineGraphView)
@@ -473,4 +484,21 @@ class BarStroke: UIView, GraphStroke {
             graphPath.closePath()
         }
     }
+}
+extension FirstViewController {
+    
+    func morphingDidStart(label: LTMorphingLabel) {
+        
+    }
+    
+    func morphingDidComplete(label: LTMorphingLabel) {
+        
+    }
+    
+    func morphingOnProgress(label: LTMorphingLabel, _ progress: Float) {
+        
+    }
+    
+
+    
 }

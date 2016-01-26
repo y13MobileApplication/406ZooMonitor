@@ -1,0 +1,20 @@
+# Uncomment this line to define a global platform for your project
+ platform :ios, '9.1'
+# Uncomment this line if you're using Swift
+ use_frameworks!
+
+target 'mobileApplication' do
+ pod 'LTMorphingLabel',git: 'https://github.com/lexrus/LTMorphingLabel' 
+ pod 'ZFRippleButton'
+# pod 'MaterialKit'
+ pod 'ZCAnimatedLabel'
+end
+
+target 'mobileApplicationTests' do
+
+end
+
+target 'mobileApplicationUITests' do
+
+end
+
