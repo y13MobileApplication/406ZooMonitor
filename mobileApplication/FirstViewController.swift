@@ -10,12 +10,13 @@ import ZCAnimatedLabel
 import PNChart
 
 
-class FirstViewController: UIViewController,UIApplicationDelegate {
+class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegate {
     
     //関数宣言
     private var myImageView: UIImageView!
     private var renewalButton: UIBarButtonItem!
     private var nullButton: UIBarButtonItem!
+    
     
 
     override func viewDidLoad() {
@@ -108,12 +109,12 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
                                     log += "\(dat):"
                                 }
                                 if let cal:Int = data["Count"] as? Int{
-                                    calcu = cal
+
                                     log += "\(cal)人\n"
                                 }
                             }
                         }
-                    }
+                        }
                         //受け渡し用
                         print("calcu:\(calcu)人\n")
                         let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -186,7 +187,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
 
         // 入室者詳細ボタンを生成する.
         let infoButton: UIButton = UIButton(frame: CGRectMake(0,0,200,50))
-        infoButton.backgroundColor = UIColor.whiteColor();
+        infoButton.backgroundColor = UIColor.clearColor();
         infoButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         infoButton.layer.masksToBounds = true
         infoButton.setTitle("More Infomation", forState: .Normal)
@@ -197,7 +198,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
         // ログボタンを生成する.
         //let logButton: UIButton = ZFRippleButton(frame: CGRectMake(0,0,150,50))
         let logButton: UIButton = UIButton(frame: CGRectMake(0,0,150,50))
-        logButton.backgroundColor = UIColor.whiteColor();
+        logButton.backgroundColor = UIColor.clearColor();
         logButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         logButton.layer.masksToBounds = true
         logButton.setTitle("detail_log", forState: .Normal)
@@ -268,233 +269,44 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
     
     //グラフ描画
     func drawLineGraph() {
-        // ここにグラフの値を入力する
-        let stroke1 = LineStroke(graphPoints: [1, 3, 1, 4, 9, 12, 4])
-        // グラフの色を設定する(今はシアンカラー)
-        stroke1.color = UIColor.cyanColor()
-        
-        let graphFrame = LineStrokeGraphFrame(strokes: [stroke1])
-        // グラフの座標を決定今は
-        let lineGraphView = UIView(frame: CGRect(x: 0, y: self.view.bounds.height - self.view.bounds.height*7/10, width: view.frame.width, height: self.view.bounds.height/3))
-        // グラフの背景の色
-        lineGraphView.backgroundColor = UIColor.darkGrayColor()
-        lineGraphView.layer.masksToBounds = true
-        lineGraphView.addSubview(graphFrame)
-        
-        view.addSubview(lineGraphView)
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-}
 
-protocol GraphObject {
-    var view: UIView { get }
-}
-
-extension GraphObject {
-    var view: UIView {
-        return self as! UIView
-    }
-    
-    func drawLine(from: CGPoint, to: CGPoint) {
-        let linePath = UIBezierPath()
+        var ChartLabel:UILabel = UILabel(frame: CGRectMake(0, 90, 320.0, 30))
         
-        linePath.moveToPoint(from)
-        linePath.addLineToPoint(to)
-        
-        linePath.lineWidth = 0.5
-        
-        let color = UIColor.whiteColor()
-        color.setStroke()
-        linePath.stroke()
-        linePath.closePath()
-    }
-}
 
-protocol GraphFrame: GraphObject {
-    var strokes: [GraphStroke] { get }
-}
-
-extension GraphFrame {
-    // 保持しているstrokesの中で最大値
-    var yAxisMax: CGFloat {
-        return strokes.map{ $0.graphPoints }.flatMap{ $0 }.flatMap{ $0 }.maxElement()!
-    }
-    
-    // 保持しているstrokesの中でいちばん長い配列の長さ
-    var xAxisPointsCount: Int {
-        return strokes.map{ $0.graphPoints.count }.maxElement()!
-    }
-    
-    // X軸の点と点の幅
-    var xAxisMargin: CGFloat {
-        return view.frame.width/CGFloat(xAxisPointsCount)
-    }
-}
-
-class LineStrokeGraphFrame: UIView, GraphFrame {
-    var strokes = [GraphStroke]()
-    
-    convenience init(strokes: [GraphStroke]) {
-        self.init()
-        self.strokes = strokes
-    }
-    
-    override func didMoveToSuperview() {
-        if self.superview == nil { return }
-        self.frame.size = self.superview!.frame.size
-        self.view.backgroundColor = UIColor.clearColor()
+        ChartLabel.textColor = UIColor.cyanColor()
+        ChartLabel.font = UIFont(name: "Avenir-Medium", size:23.0)
+        ChartLabel.textAlignment = NSTextAlignment.Center
+        //Add LineChart
+        ChartLabel.text = "Line Chart"
         
-        strokeLines()
-    }
+       
+        
+
+        //Add BarChart
+        ChartLabel.text = "Bar Chart"
+        
+        var barChart = PNBarChart(frame: CGRectMake(0, 140.0, 320.0, 250.0))
+        barChart.backgroundColor = UIColor.clearColor()
+        //            barChart.yLabelFormatter = ({(yValue: CGFloat) -> NSString in
+        //                var yValueParsed:CGFloat = yValue
+        //                var labelText:NSString = NSString(format:"%1.f",yValueParsed)
+        //                return labelText;
+        //            })
+        
+        
+        // remove for default animation (all bars animate at once)
+        
+        
+        barChart.labelMarginTop = 20.0
+        barChart.xLabels = ["1/25","1/26","1/27","1/28","1/29","1/30","1/31"]
+        barChart.yValues = [1,24,12,18,30,10,21]
+        barChart.strokeChart()
+        
+        barChart.delegate = self
+        
+        view.addSubview(ChartLabel)
+        view.addSubview(barChart)
     
-    func strokeLines() {
-        for stroke in strokes {
-            self.addSubview(stroke as! UIView)
         }
-    }
-    
-    override func drawRect(rect: CGRect) {
-        drawTopLine()
-        drawBottomLine()
-        drawVerticalLines()
-    }
-    
-    func drawTopLine() {
-        self.drawLine(
-            CGPoint(x: 0, y: frame.height),
-            to: CGPoint(x: frame.width, y: frame.height)
-        )
-    }
-    
-    func drawBottomLine() {
-        self.drawLine(
-            CGPoint(x: 0, y: 0),
-            to: CGPoint(x: frame.width, y: 0)
-        )
-    }
-    
-    func drawVerticalLines() {
-        for i in 1..<xAxisPointsCount {
-            let x = xAxisMargin*CGFloat(i)
-            self.drawLine(
-                CGPoint(x: x, y: 0),
-                to: CGPoint(x: x, y: frame.height)
-            )
-        }
-    }
-}
-
-
-protocol GraphStroke: GraphObject {
-    var graphPoints: [CGFloat?] { get }
-}
-
-extension GraphStroke {
-    var graphFrame: GraphFrame? {
-        return ((self as! UIView).superview as? GraphFrame)
-    }
-    
-    var graphHeight: CGFloat {
-        return view.frame.height
-    }
-    
-    var xAxisMargin: CGFloat {
-        return graphFrame!.xAxisMargin
-    }
-    
-    var yAxisMax: CGFloat {
-        return graphFrame!.yAxisMax
-    }
-    
-    // indexからX座標を取る
-    func getXPoint(index: Int) -> CGFloat {
-        return CGFloat(index) * xAxisMargin
-    }
-    
-    // 値からY座標を取る
-    func getYPoint(yOrigin: CGFloat) -> CGFloat {
-        let y: CGFloat = yOrigin/yAxisMax * graphHeight
-        return graphHeight - y
-    }
-}
-
-
-class LineStroke: UIView, GraphStroke {
-    var graphPoints = [CGFloat?]()
-    var color = UIColor.whiteColor()
-    
-    convenience init(graphPoints: [CGFloat?]) {
-        self.init()
-        self.graphPoints = graphPoints
-    }
-    
-    override func didMoveToSuperview() {
-        if self.graphFrame == nil { return }
-        self.frame.size = self.graphFrame!.view.frame.size
-        self.view.backgroundColor = UIColor.clearColor()
-    }
-    
-    override func drawRect(rect: CGRect) {
-        let graphPath = UIBezierPath()
-        
-        graphPath.moveToPoint(
-            CGPoint(x: getXPoint(0), y: getYPoint(graphPoints[0] ?? 0))
-        )
-        
-        for graphPoint in graphPoints.enumerate() {
-            if graphPoint.element == nil { continue }
-            let nextPoint = CGPoint(x: getXPoint(graphPoint.index),
-                y: getYPoint(graphPoint.element!))
-            graphPath.addLineToPoint(nextPoint)
-        }
-        
-        graphPath.lineWidth = 5.0
-        color.setStroke()
-        graphPath.stroke()
-        graphPath.closePath()
-    }
-}
-
-class BarStroke: UIView, GraphStroke {
-    var graphPoints = [CGFloat?]()
-    var color = UIColor.whiteColor()
-    
-    convenience init(graphPoints: [CGFloat?]) {
-        self.init()
-        self.graphPoints = graphPoints
-    }
-    
-    override func didMoveToSuperview() {
-        if self.graphFrame == nil { return }
-        self.frame.size = self.graphFrame!.view.frame.size
-        self.view.backgroundColor = UIColor.clearColor()
-    }
-    
-    override func drawRect(rect: CGRect) {
-        for graphPoint in graphPoints.enumerate() {
-            let graphPath = UIBezierPath()
-            
-            let xPoint = getXPoint(graphPoint.index)
-            graphPath.moveToPoint(
-                CGPoint(x: xPoint, y: getYPoint(0))
-            )
-            
-            if graphPoint.element == nil { continue }
-            let nextPoint = CGPoint(x: xPoint, y: getYPoint(graphPoint.element!))
-            graphPath.addLineToPoint(nextPoint)
-            
-            graphPath.lineWidth = 30
-            color.setStroke()
-            graphPath.stroke()
-            graphPath.closePath()
-        }
-    }
-}
-func viewWillDisappear(animated: Bool) {
 
 }
