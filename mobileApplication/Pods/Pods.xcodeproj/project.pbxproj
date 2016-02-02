@@ -1317,6 +1317,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MaterialKit/MaterialKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.MaterialKit;
 				PRODUCT_NAME = MaterialKit;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1667,6 +1668,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MaterialKit/MaterialKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.MaterialKit;
 				PRODUCT_NAME = MaterialKit;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
