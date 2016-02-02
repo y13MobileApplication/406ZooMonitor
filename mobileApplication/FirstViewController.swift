@@ -4,10 +4,10 @@
 //
 
 import UIKit
-import LTMorphingLabel
-import ZFRippleButton
-import ZCAnimatedLabel
-import PNChart
+//import LTMorphingLabel
+//import ZFRippleButton
+//import ZCAnimatedLabel
+//import PNChart
 
 
 class FirstViewController: UIViewController,UIApplicationDelegate {
@@ -175,9 +175,10 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
             label.text = log;
             self.view.addSubview(label);
         }
-//受け渡し
-        var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//受け渡し用
+        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.calcu = self.calcu
+
 //        
         // 入室者詳細ボタンを生成する.
         let infoButton: UIButton = UIButton(frame: CGRectMake(0,0,200,50))
@@ -190,7 +191,8 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
         infoButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
         
         // ログボタンを生成する.
-        let logButton: UIButton = ZFRippleButton(frame: CGRectMake(0,0,150,50))
+        //let logButton: UIButton = ZFRippleButton(frame: CGRectMake(0,0,150,50))
+        let logButton: UIButton = UIButton(frame: CGRectMake(0,0,150,50))
         logButton.backgroundColor = UIColor.whiteColor();
         logButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         logButton.layer.masksToBounds = true

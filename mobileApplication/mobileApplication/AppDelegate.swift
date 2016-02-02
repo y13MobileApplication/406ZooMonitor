@@ -11,8 +11,8 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-//受け渡し変数
-    var calcu:Int?
+
+    var calcu:Int? //受け渡し変数
     internal var window: UIWindow?
     private var myNavigationController: UINavigationController?
 
