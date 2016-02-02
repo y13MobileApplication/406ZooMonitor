@@ -17,8 +17,9 @@ while true ; do
   Rh=67
 
   # dateコマンドで現在の日時を取得
-  DATE=`date "+%m/%d,%H:%M"`
-  DAY=`date "+%d"`
+  DATE=`date "+%m\/%d,%H:%M"`
+  DAY=`date "+%d-%H:%M:%S"`
+  MANTH=`date "+%y-%m"`
   JSON=`echo "{\"day\":\"$DATE\",\"Count\":"$Count"},\r"`
   # gnuplot 出力用のデータを作成する
   DAT=`echo $DATE $Count >> graph.dat`
@@ -31,21 +32,18 @@ while true ; do
     echo "File Deleted"
     rm -r log.json-e
   fi
-  # gnuplotのコマンド
-  #gnuplot -e "
-  #  set title 'test graph' ;
-  #  set xdata time ;
-  #  set timefmt '%Y-%m-%d,%H:%M:%S' ;
-  #  set format x "%H:%M" ;
-  #  plot "graph.dat" using 1:2 w l ;
-  #  pause -1
-  #"
+
   # scpコマンドでVMにファイルを送る -Pはポート番号指定 -iは鍵認証
   scp -P 1234 -i ~/.ssh/client_rsa ./log.json e135750@10.0.3.187:/var/www/html
 
   # 1ヶ月毎にクリーンアップする
-  if [[ $DAY == "01" ]]; then
+  if [[ $DAY == "01-00:00:00" ]]; then
     echo "clean up..." # クリーンアップ
+    # ここでリネーム例えば2016年2月分のlog.jsonを2016-02.jsonに変更する
+    mv log.json $MANTH.json
+    # リネームされたファイルをVMに送信
+    scp -P 1234 -i ~/.ssh/client_rsa ./$MANTH.json e135750@10.0.3.187:/var/www/html
+    # そしてlog.jsonを上書き保存
     cat template.json > log.json
   fi
   # 1分ごとにファイル送信(適時変更)
