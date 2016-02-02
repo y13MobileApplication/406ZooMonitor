@@ -4,10 +4,10 @@
 //
 
 import UIKit
-//import LTMorphingLabel
-//import ZFRippleButton
-//import ZCAnimatedLabel
-//import PNChart
+import LTMorphingLabel
+import ZFRippleButton
+import ZCAnimatedLabel
+import PNChart
 
 
 class FirstViewController: UIViewController,UIApplicationDelegate {
@@ -16,11 +16,12 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
     private var myImageView: UIImageView!
     private var renewalButton: UIBarButtonItem!
     private var nullButton: UIBarButtonItem!
-    var calcu:Int = 0
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        var calcu:Int?
+        
         //グラフの描画
         //参考サイト:http://developer-blog.finc.co.jp/post/133981060627/
         drawLineGraph()
@@ -52,10 +53,10 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
         
 //------------JSON取得---------
         
-        func getJSON() {//http://www.cc.u-ryukyu.ac.jp/~e135740/test.json
+        func getJSON()  {//http://www.cc.u-ryukyu.ac.jp/~e135740/test.json
             // let URL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/test.json")
            // let URL = NSURL(string: "http://10.0.3.187/log.json")
-            guard let URL:NSURL = NSURL(string: "http://www.cc.u-ryukyu.ac.jp/~e135740/test.json") else{
+            guard let URL:NSURL = NSURL(string: "http://10.0.3.187/log.json") else{
                 return
             }
             let req:NSURLRequest = NSURLRequest(URL: URL,cachePolicy: .ReloadIgnoringLocalCacheData,
@@ -96,7 +97,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
                                     log += "log\n\(dat):"
                                 }
                                 if let cal:Int = data["Count"] as? Int{
-                                    self.calcu = cal
+                                    calcu = cal
                                     log += "\(cal)人\n"
                                     msg = "現在\(cal)人います"
                                     self.title = "現在\(cal)人"
@@ -107,13 +108,18 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
                                     log += "\(dat):"
                                 }
                                 if let cal:Int = data["Count"] as? Int{
-                                    self.calcu = cal
+                                    calcu = cal
                                     log += "\(cal)人\n"
                                 }
                             }
                         }
                     }
-
+                        //受け渡し用
+                        print("calcu:\(calcu)人\n")
+                        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.badge = calcu
+                        
+                        //
                     print(msg)
                     print(log)
                     }
@@ -127,7 +133,6 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
                 }
             })//ここまでTask
             task.resume()
-            
         }
         
 //--------------JSON取得---------
@@ -175,11 +180,10 @@ class FirstViewController: UIViewController,UIApplicationDelegate {
             label.text = log;
             self.view.addSubview(label);
         }
-//受け渡し用
-        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.calcu = self.calcu
+        
+        
 
-//        
+
         // 入室者詳細ボタンを生成する.
         let infoButton: UIButton = UIButton(frame: CGRectMake(0,0,200,50))
         infoButton.backgroundColor = UIColor.whiteColor();

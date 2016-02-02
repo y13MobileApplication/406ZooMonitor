@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1FDF85DD1C0D745200AE5043 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FDF85DC1C0D745200AE5043 /* test.json */; };
-		6548D73E1C4E28360042650A /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548D73D1C4E28360042650A /* SwiftSpinner.swift */; };
 		65EF2B361BFE13E9009C5C49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF2B351BFE13E9009C5C49 /* AppDelegate.swift */; };
 		65EF2B381BFE13E9009C5C49 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF2B371BFE13E9009C5C49 /* ViewController.swift */; };
 		65EF2B3B1BFE13E9009C5C49 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65EF2B391BFE13E9009C5C49 /* Main.storyboard */; };
@@ -48,7 +47,6 @@
 		2C16A169B896EDEA29B27671 /* Pods-mobileApplicationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mobileApplicationUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mobileApplicationUITests/Pods-mobileApplicationUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2E312518524F7A5CC3E25A57 /* Pods_mobileApplicationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mobileApplicationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		327BCFC5BDACC98717ECE5BA /* Pods_mobileApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mobileApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6548D73D1C4E28360042650A /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftSpinner.swift; path = ../../../SwiftSpinner/SwiftSpinner/SwiftSpinner.swift; sourceTree = "<group>"; };
 		65EF2B321BFE13E9009C5C49 /* mobileApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mobileApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65EF2B351BFE13E9009C5C49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65EF2B371BFE13E9009C5C49 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				1FDF85DC1C0D745200AE5043 /* test.json */,
-				6548D73D1C4E28360042650A /* SwiftSpinner.swift */,
 				65EF2B6F1BFE3179009C5C49 /* SecondLogViewController.swift */,
 				65EF2B6D1BFE3010009C5C49 /* FirstLogViewController.swift */,
 				65EF2B6B1BFE19EA009C5C49 /* SecondViewController.swift */,
@@ -459,7 +456,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EF2B701BFE3179009C5C49 /* SecondLogViewController.swift in Sources */,
-				6548D73E1C4E28360042650A /* SwiftSpinner.swift in Sources */,
 				65EF2B381BFE13E9009C5C49 /* ViewController.swift in Sources */,
 				65EF2B6E1BFE3010009C5C49 /* FirstLogViewController.swift in Sources */,
 				65EF2B6A1BFE1950009C5C49 /* FirstViewController.swift in Sources */,
