@@ -16,7 +16,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
     private var myImageView: UIImageView!
     private var renewalButton: UIBarButtonItem!
     private var nullButton: UIBarButtonItem!
-    
+  
     
 
     override func viewDidLoad() {
@@ -25,13 +25,14 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
         
         //グラフの描画
         //参考サイト:http://developer-blog.finc.co.jp/post/133981060627/
-        drawLineGraph()
+       
 
         //メッセージを格納する変数
         var msg:String = "現在自習室には"
         var log:String = ""
         //現在の人数を計算する変数
-        
+        var addx: [String] = []
+        var addy: [String] = []
         // 背景色を設定する.
         self.view.backgroundColor = UIColor.whiteColor()
  
@@ -94,29 +95,69 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
                     for datN in 0..<5 {
                         if let data:NSDictionary = arrayData[datN] as? NSDictionary {
                             if datN == 0 {
-                                if let dat:String = data["day"] as? String{
-                                    log += "log\n\(dat):"
+                                print("for回数:\(datN)")
+                                if let year:String = data["year"] as? String{
+                                   // log += "20\(year),"
+                                    print("\(year)")
+                                }
+                                if let day:String = data["day"] as? String{
+                                    log += "\(day),"
+                                    print("\(day)")
+                                }
+                                if let time:String = data["time"] as? String{
+                                    log += " \(time),"
+                                    addx.append("\(time)")
+                                    print("\(time)\n")
                                 }
                                 if let cal:Int = data["Count"] as? Int{
                                     calcu = cal
-                                    log += "\(cal)人\n"
+                                    log += " \(cal)人,"
+                                    addy.append("\(cal)")
                                     msg = "現在\(cal)人います"
                                     self.title = "現在\(cal)人"
                                 }
+                                if let room:CGFloat = data["Room"] as? CGFloat{
+                                    log += " \(room)人,"
+                                }
+                                if let rh:CGFloat = data["Rh"] as? CGFloat{
+                                    log += " \(rh)人\n"
+                                }
                             }
                             else{
-                                if let dat:String = data["day"] as? String{
-                                    log += "\(dat):"
+                                print("for回数:\(datN)")
+                                if let year:String = data["year"] as? String{
+                                    //log += "20\(year),"
+                                    print("\(year)")
+                                }
+                                if let day:String = data["day"] as? String{
+                                    log += "\(day),"
+                                    
+                                    print("\(day)")
+                                }
+                                if let time:String = data["time"] as? String{
+                                    log += " \(time),"
+                                    addx.append("\(time)")
+                                    print("\(time)")
                                 }
                                 if let cal:Int = data["Count"] as? Int{
-
-                                    log += "\(cal)人\n"
+                                    addy.append("\(cal)")
+                                    log += " \(cal)人,"
+                                }
+                                if let room:CGFloat = data["Room"] as? CGFloat{
+                                    log += " \(room)人,"
+                                }
+                                if let rh:CGFloat = data["Rh"] as? CGFloat{
+                                    log += " \(rh)人\n"
                                 }
                             }
                         }
                         }
                         //受け渡し用
+                        print("addx:\(addx)")
+                        self.drawLineGraph(addx,y: addy)
+                        
                         print("calcu:\(calcu)人\n")
+                        print("\(log)")
                         let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                         appDelegate.badge = calcu
                         
@@ -127,7 +168,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
                     
                         print(msg)
                     //UITextFieldを表示。ここで呼び出すとjsonファイルが反映される
-                        textbox(self.view.bounds.height - self.view.bounds.height*7/10)
+                        //textbox(self.view.bounds.height - self.view.bounds.height*7/10)
                         logbox(self.view.bounds.height - self.view.bounds.height*2/10)
                 } catch{
                       print("Proccess is interrupted by error")
@@ -161,23 +202,22 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
         
         func logbox(tate: CGFloat){
             // let label = UILabel(frame: CGRectMake(0, 0, 250, 120));
-            let label:UITextView = UITextView(frame: CGRectMake(0, 0, 150,80));
+            let label:UITextView = UITextView(frame: CGRectMake(0, 0, self.view.bounds.width*2/3,self.view.bounds.height/7));
             //label.center = CGPointMake(160, 284);//表示位置
             label.center = CGPointMake(160,tate);
             label.backgroundColor = UIColor.whiteColor();
             // 角に丸みをつける.
             label.layer.masksToBounds = true
             // 丸みのサイズを設定する.
-            label.layer.cornerRadius = 20.0
+           // label.layer.cornerRadius = 20.0
             // 枠線の太さを設定する.
             label.layer.borderWidth = 1
             // 枠線の色を設定する.
             label.layer.borderColor = UIColor.blackColor().CGColor
-            label.textAlignment = NSTextAlignment.Center //中央
-            //label.textAlignment = NSTextAlignment.Left //左詰め
+            //label.textAlignment = NSTextAlignment.Center //中央
+            label.textAlignment = NSTextAlignment.Left //左詰め
             // テキストを編集不可にする.
             label.editable = false
-            
             label.text = log;
             self.view.addSubview(label);
         }
@@ -268,24 +308,20 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
     }
     
     //グラフ描画
-    func drawLineGraph() {
+    func drawLineGraph(x:[String],y:[String]) {
 
-        var ChartLabel:UILabel = UILabel(frame: CGRectMake(0, 90, 320.0, 30))
+        let ChartLabel:UILabel = UILabel(frame: CGRectMake(0, self.view.bounds.height/6, self.view.bounds.width, self.view.bounds.height/12))
         
 
         ChartLabel.textColor = UIColor.cyanColor()
         ChartLabel.font = UIFont(name: "Avenir-Medium", size:23.0)
         ChartLabel.textAlignment = NSTextAlignment.Center
-        //Add LineChart
-        ChartLabel.text = "Line Chart"
-        
-       
         
 
         //Add BarChart
         ChartLabel.text = "Bar Chart"
         
-        var barChart = PNBarChart(frame: CGRectMake(0, 140.0, 320.0, 250.0))
+        let barChart = PNBarChart(frame: CGRectMake(0, self.view.bounds.height*0.9/5, self.view.bounds.width, self.view.bounds.height/2))
         barChart.backgroundColor = UIColor.clearColor()
         //            barChart.yLabelFormatter = ({(yValue: CGFloat) -> NSString in
         //                var yValueParsed:CGFloat = yValue
@@ -298,8 +334,10 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
         
         
         barChart.labelMarginTop = 20.0
-        barChart.xLabels = ["1/25","1/26","1/27","1/28","1/29","1/30","1/31"]
-        barChart.yValues = [1,24,12,18,30,10,21]
+        //barChart.xLabels = ["1/25","1/26","1/27","1/28","1/29","1/30","1/31"]
+        barChart.xLabels = x
+       // barChart.yValues = [1,24,12,18,30,10,21]
+        barChart.yValues = y
         barChart.strokeChart()
         
         barChart.delegate = self

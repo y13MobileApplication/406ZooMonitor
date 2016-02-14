@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, PNLineChartPointStyle) {
 @class PNLineChartDataItem;
 
 typedef PNLineChartDataItem *(^LCLineChartDataGetter)(NSUInteger item);
-
+//NSUInteger
 @interface PNLineChartData : NSObject
 
 @property (strong) UIColor *color;
@@ -41,3 +41,4 @@ typedef PNLineChartDataItem *(^LCLineChartDataGetter)(NSUInteger item);
 @property (nonatomic, assign) CGFloat lineWidth;
 
 @end
+///Users/e135740/Documents/workspace/406ZooMonitor/mobileApplication/Pods/PNChart/PNChart/PNLineChartData.h
