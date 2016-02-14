@@ -6,9 +6,9 @@
 target 'mobileApplication' do
  pod 'LTMorphingLabel',git: 'https://github.com/lexrus/LTMorphingLabel' 
  pod 'ZFRippleButton'
- pod 'MaterialKit'
  pod 'ZCAnimatedLabel'
  pod 'PNChart'
+ pod 'PNChartSwift',:git => 'https://github.com/kevinzhow/PNChart-Swift.git'
 end
 
 target 'mobileApplicationTests' do

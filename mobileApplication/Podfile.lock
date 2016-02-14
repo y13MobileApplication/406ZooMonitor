@@ -1,36 +1,41 @@
 PODS:
   - LTMorphingLabel (0.1.1)
-  - MaterialKit (0.3.5)
   - PNChart (0.8.8):
     - UICountingLabel (~> 1.2.0)
+  - PNChartSwift (0.0.2)
   - UICountingLabel (1.2.0)
   - ZCAnimatedLabel (0.0.4)
   - ZFRippleButton (0.5.1)
 
 DEPENDENCIES:
   - LTMorphingLabel (from `https://github.com/lexrus/LTMorphingLabel`)
-  - MaterialKit
   - PNChart
+  - PNChartSwift (from `https://github.com/kevinzhow/PNChart-Swift.git`)
   - ZCAnimatedLabel
   - ZFRippleButton
 
 EXTERNAL SOURCES:
   LTMorphingLabel:
     :git: https://github.com/lexrus/LTMorphingLabel
+  PNChartSwift:
+    :git: https://github.com/kevinzhow/PNChart-Swift.git
 
 CHECKOUT OPTIONS:
   LTMorphingLabel:
     :commit: 945c40f243fd450e669ed0f4fdb89e7bb73e1e52
     :git: https://github.com/lexrus/LTMorphingLabel
+  PNChartSwift:
+    :commit: 88eb8bcb4cd415d02775b2d355542b8bd338712d
+    :git: https://github.com/kevinzhow/PNChart-Swift.git
 
 SPEC CHECKSUMS:
   LTMorphingLabel: 254c44f9ef5afa79d3464f8b89d7b00567e5aebc
-  MaterialKit: 6f1e9382f89593df768bc0c31ded9952a6d8ad46
   PNChart: 25f91e9c4688af49c3647489760624d037f5383f
+  PNChartSwift: bcdfbffd65920072463eff42d0dfb46189bf4495
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   ZCAnimatedLabel: 519b688bef4403fd356bc785f9b61cdfd8e6472d
   ZFRippleButton: 263bdf4e31dabd5826133b121d9ff908c87a6a11
 
-PODFILE CHECKSUM: a549da3858556090a03b796f8030a4c6af4f64e3
+PODFILE CHECKSUM: a385faf195bd845587a0b1069837fe5a7117b2fb
 
 COCOAPODS: 1.0.0.beta.2
