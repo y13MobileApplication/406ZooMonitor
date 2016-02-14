@@ -15,7 +15,7 @@ while true ; do
   YEAR=`date "+%y"`
   HOUR=`date "+%H:%M"`
   MD=`date "+%m\/%d"`
-  JSON=`echo "{\"Year\":\"$YEAR\",\"Day\":\"$MD\",\"Hour\":\"$HOUR\",\"Count\":"$Count"},\r"`
+  JSON=`echo "{\"year\":\"$YEAR\",\"day\":\"$MD\",\"time\":\"$HOUR\",\"Count\":"$Count"},\r"`
   # gnuplot 出力用のデータを作成する
   DAT=`echo $DATE $Count >> graph.dat`
 
