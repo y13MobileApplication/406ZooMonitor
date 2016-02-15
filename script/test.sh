@@ -1,8 +1,8 @@
 #!/bin/sh
 #時間間隔でファイルをサーバーに送信する
 while true ; do
-  Random=`echo $(( $(od -vAn -N4 -tu4 < /dev/random) % 20 ))`
-  Count=`echo "$Random"`
+  # Random=`echo $(( $(od -vAn -N4 -tu4 < /dev/random) % 20 ))`
+  # Count=`echo "$Random"`
   # tailコマンドで最後の行を抽出しtrコマンドで数字だけを取り出す
   Count=`tail -n 1 log.txt | tr -cd '0123456789\n'`
   # awkコマンドで湿度と温度を抽出する
