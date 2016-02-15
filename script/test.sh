@@ -1,12 +1,17 @@
 #!/bin/sh
 #時間間隔でファイルをサーバーに送信する
 while true ; do
+  Random=`echo $(( $(od -vAn -N4 -tu4 < /dev/random) % 20 ))`
+  Count=`echo "$Random"`
   # tailコマンドで最後の行を抽出しtrコマンドで数字だけを取り出す
   Count=`tail -n 1 log.txt | tr -cd '0123456789\n'`
+  # awkコマンドで湿度と温度を抽出する
+  Rroom=`tail -n 1 THlog.txt | awk '{print $2}'`
+  Rh=`tail -n 1 THlog.txt | awk '{print $1}'`
   # 室温の定義
-  Room=25
+  # Room=25.0
   # 湿度の定義
-  Rh=67
+  # Rh=67.0
 
   # dateコマンドで現在の日時を取得
   DATE=`date "+%m\/%d,%H:%M"`
@@ -15,7 +20,7 @@ while true ; do
   YEAR=`date "+%y"`
   HOUR=`date "+%H:%M"`
   MD=`date "+%m\/%d"`
-  JSON=`echo "{\"year\":\"$YEAR\",\"day\":\"$MD\",\"time\":\"$HOUR\",\"Count\":"$Count"},\r"`
+  JSON=`echo "{\"year\":\"$YEAR\",\"day\":\"$MD\",\"time\":\"$HOUR\",\"Count\":"$Count",\"Room\":"$Room,\"Rh\":"$Rh""},\r"`
   # gnuplot 出力用のデータを作成する
   DAT=`echo $DATE $Count >> graph.dat`
 
