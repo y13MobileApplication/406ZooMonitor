@@ -4,10 +4,10 @@ while true ; do
   # Random=`echo $(( $(od -vAn -N4 -tu4 < /dev/random) % 20 ))`
   # Count=`echo "$Random"`
   # tailコマンドで最後の行を抽出しtrコマンドで数字だけを取り出す
-  Count=`tail -n 1 log.txt | tr -cd '0123456789\n'`
+  Count=`tail -n 1 ~/Processing/txtGenerator/log.txt | tr -cd '0123456789\n'`
   # awkコマンドで湿度と温度を抽出する
-  Room=`tail -n 1 THlog.txt | cut -c 6-9`
-  Rh=`tail -n 1 THlog.txt | cut -c 1-4`
+  Room=`tail -n 1 ~/Processing/THtxtGenerator/THlog.txt | cut -c 6-9`
+  Rh=`tail -n 1 ~/Processing/THtxtGenerator/THlog.txt | cut -c 1-4`
   # 室温の定義
   # Room=25.0
   # 湿度の定義
