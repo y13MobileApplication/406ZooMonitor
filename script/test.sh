@@ -5,7 +5,8 @@ while true ; do
   # Count=`echo "$Random"`
   # tailコマンドで最後の行を抽出しtrコマンドで数字だけを取り出す
   Count=`tail -n 3 ~/Processing/txtGenerator/log.txt | sed -n 2p | tr -cd '0123456789\n'`
-  # awkコマンドで湿度と温度を抽出する
+  # cutコマンドで湿度と温度を抽出する
+  # cutコマンドの指定はすっごいガバガバだったりする
   Room=`tail -n 3 ~/Processing/txtGenerator/THlog.txt | sed -n 2p | cut -c 6-9`
   Rh=`tail -n 3 ~/Processing/txtGenerator/THlog.txt | sed -n 2p | cut -c 1-4`
   # 室温の定義
@@ -28,6 +29,9 @@ while true ; do
     sed -i -e "3s/^/${JSON}/" log.json
     # scpコマンドでVMにファイルを送る -Pはポート番号指定 -iは鍵認証
     scp -P 1234 -i ~/.ssh/client_rsa ./log.json e135750@10.0.3.187:/var/www/html
+  else
+    # いずれかのデータにnullが存在した場合
+    echo "データにnullが存在するため送信処理を行いませんでした"
   fi
   # 現在生成される"log.json-e"をとりあえず削除するスクリプト
   if [ -e log.json-e ]; then
