@@ -20,21 +20,20 @@ while true ; do
   YEAR=`date "+%y"`
   HOUR=`date "+%H:%M"`
   MD=`date "+%m\/%d"`
-  JSON=`echo "{\"year\":\"$YEAR\",\"day\":\"$MD\",\"time\":\"$HOUR\",\"Count\":"$Count",\"Room\":$Room,\"Rh\":$Rh},\r"`
-  # gnuplot 出力用のデータを作成する
-  DAT=`echo $DATE $Count >> graph.dat`
-
-  # sedコマンドでjsonファイルの3行目を書き換える
-  # 現在"log.json-e"という変なファイルが作成される
-  sed -i -e "3s/^/${JSON}/" log.json
+  # データーがnullでなければ実行する
+  if [ -n "$Count" ] && [ -n "$Room" ] && [ -n "$Rh"]; then
+    JSON=`echo "{\"year\":\"$YEAR\",\"day\":\"$MD\",\"time\":\"$HOUR\",\"Count\":"$Count",\"Room\":$Room,\"Rh\":$Rh},\r"`
+    # sedコマンドでjsonファイルの3行目を書き換える
+    # 現在"log.json-e"という変なファイルが作成される
+    sed -i -e "3s/^/${JSON}/" log.json
+    # scpコマンドでVMにファイルを送る -Pはポート番号指定 -iは鍵認証
+    scp -P 1234 -i ~/.ssh/client_rsa ./log.json e135750@10.0.3.187:/var/www/html
+  fi
   # 現在生成される"log.json-e"をとりあえず削除するスクリプト
   if [ -e log.json-e ]; then
     echo "File Deleted"
     rm -r log.json-e
   fi
-
-  # scpコマンドでVMにファイルを送る -Pはポート番号指定 -iは鍵認証
-  scp -P 1234 -i ~/.ssh/client_rsa ./log.json e135750@10.0.3.187:/var/www/html
 
   # 1ヶ月毎にクリーンアップする
   if [[ $DAY == "01-00:00:00" ]]; then
