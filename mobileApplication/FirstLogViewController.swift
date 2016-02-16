@@ -16,9 +16,9 @@ class FirstLogViewController: UIViewController, PNChartDelegate {
         //入退室の記述の変数
         var calcu:String = ""
         // 室温と湿度
-        var roomArray: [CGFloat] = [12.0,13.0]
-        var rhArray: [CGFloat] = [12.0,14.0]
-        var timeArray: [String] = ["12","15"]
+        var roomArray: [CGFloat] = []
+        var rhArray: [CGFloat] = []
+        var timeArray: [String] = []
         // 背景色をGreenに設定する.
         self.view.backgroundColor = UIColor.whiteColor()
         self.title = "detail_log"
@@ -84,7 +84,7 @@ class FirstLogViewController: UIViewController, PNChartDelegate {
                                         roomArray.append(room)
                                     }
                                     if let rh:CGFloat = data["Rh"] as? CGFloat{
-                                        msg += "\(rh)℃\n"
+                                        msg += "\(rh)%\n"
                                         rhArray.append(rh)
                                     }
                                 }
@@ -109,7 +109,7 @@ class FirstLogViewController: UIViewController, PNChartDelegate {
                                         msg += "\(room)℃,"
                                     }
                                     if let rh:CGFloat = data["Rh"] as? CGFloat{
-                                        msg += "\(rh)℃\n"
+                                        msg += "\(rh)%\n"
                                     }
                                 }
                             }

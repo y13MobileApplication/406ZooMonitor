@@ -51,7 +51,7 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
         
 //-----------------画像---------
 
-        
+    
         
 //------------JSON取得---------
         
@@ -117,10 +117,10 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
                                     self.title = "現在\(cal)人"
                                 }
                                 if let room:CGFloat = data["Room"] as? CGFloat{
-                                    log += " \(room)人,"
+                                    log += " \(room)℃,"
                                 }
                                 if let rh:CGFloat = data["Rh"] as? CGFloat{
-                                    log += " \(rh)人\n"
+                                    log += " \(rh)%\n"
                                 }
                             }
                             else{
@@ -144,10 +144,10 @@ class FirstViewController: UIViewController,UIApplicationDelegate,PNChartDelegat
                                     log += " \(cal)人,"
                                 }
                                 if let room:CGFloat = data["Room"] as? CGFloat{
-                                    log += " \(room)人,"
+                                    log += " \(room)℃,"
                                 }
                                 if let rh:CGFloat = data["Rh"] as? CGFloat{
-                                    log += " \(rh)人\n"
+                                    log += " \(rh)%\n"
                                 }
                             }
                         }
