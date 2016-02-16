@@ -6,8 +6,8 @@ while true ; do
   # tailコマンドで最後の行を抽出しtrコマンドで数字だけを取り出す
   Count=`tail -n 1 log.txt | tr -cd '0123456789\n'`
   # awkコマンドで湿度と温度を抽出する
-  Rroom=`tail -n 1 THlog.txt | awk '{print $2}'`
-  Rh=`tail -n 1 THlog.txt | awk '{print $1}'`
+  Room=`tail -n 1 THlog.txt | cut -c 6-9`
+  Rh=`tail -n 1 THlog.txt | cut -c 1-4`
   # 室温の定義
   # Room=25.0
   # 湿度の定義
@@ -20,7 +20,7 @@ while true ; do
   YEAR=`date "+%y"`
   HOUR=`date "+%H:%M"`
   MD=`date "+%m\/%d"`
-  JSON=`echo "{\"year\":\"$YEAR\",\"day\":\"$MD\",\"time\":\"$HOUR\",\"Count\":"$Count",\"Room\":"$Room,\"Rh\":"$Rh""},\r"`
+  JSON=`echo "{\"year\":\"$YEAR\",\"day\":\"$MD\",\"time\":\"$HOUR\",\"Count\":"$Count",\"Room\":$Room,\"Rh\":$Rh},\r"`
   # gnuplot 出力用のデータを作成する
   DAT=`echo $DATE $Count >> graph.dat`
 
